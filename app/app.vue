@@ -38,7 +38,7 @@
                     <h4>{{ kurs.title }}</h4>
                     <p v-html="formatRichText(kurs.description)"></p>
                     <p v-if="kurs.start"><b>Start</b> {{ formatToGermanDate(kurs.start) }} ({{ kurs.termCount }} Termine)</p>
-                    <p>Energieausgleich {{ kurs.cost }}</p>
+                    <p v-if="kurs.cost">Energieausgleich {{ kurs.cost }}</p>
                   </div>
                 </div>
               </template>
@@ -206,7 +206,7 @@ main
         margin-top: 2rem
       h4
         color: darken(#6B8E67, 10%)
-        font-size: 1.1rem
+        font-size: 1.3rem
         font-weight: bold
         margin-bottom: 1rem
       .blueFont
