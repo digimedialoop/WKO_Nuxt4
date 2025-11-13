@@ -4,10 +4,19 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run generate
 
-# Stage 2: Serve static files
+# Stage 2: Serve static files  
 FROM nginx:alpine
-COPY --from=builder /app/.output/public /usr/share/nginx/html
+
+# Lösche die default nginx config
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Kopiere deine Nuxt files
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Optional: Eigene nginx config kopieren
+# COPY nginx.conf /etc/nginx/conf.d/
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
