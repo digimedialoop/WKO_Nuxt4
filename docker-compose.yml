@@ -1,0 +1,6 @@
+services:
+  nuxt:
+    build: .
+    container_name: wko_nuxt
+    ports:
+      - "3001:80"
